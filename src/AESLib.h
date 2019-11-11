@@ -6,14 +6,17 @@
 #include "base64.h"
 
 #define AES_DEBUG
-#define debug(format, ...) if (Serial) Serial.printf ( format, __VA_ARGS__)
-#define dumpHex(arr, count) if (Serial) { for(int kkk =0;kkk< count;kkk++) \
-                                      Serial.printf ("%x " ,arr[kkk]); \
-                                      Serial.printf ("\n"); \
+//#define debug(format, ...) if (Serial) Serial.printf ( format, __VA_ARGS__)
+#define dumpHex(arr, count) if (Serial) { for(int kkk =0;kkk< count;kkk++) {\
+                                      Serial.print(Serial_print_hex_map[(arr[kkk] >> 4) &0xf ]);\
+                                      Serial.print(Serial_print_hex_map[(arr[kkk]) &0xf ]);\
+                                      Serial.print (" ");}\
+                                      Serial.println (); \
                           }
-#define dump(arr, count) if (Serial) { for(int kkk =0;kkk< count;kkk++) \
-                                      Serial.printf ("%s," ,arr[kkk]); \
-                                      Serial.printf ("\n"); \
+#define dump(arr, count) if (Serial) { for(int kkk =0;kkk< count;kkk++) {\
+                                      Serial.print (arr[kkk]); \
+                                      Serial.print (","); }\
+                                      Serial.println (); \
                           }
 class AESLib
 {
